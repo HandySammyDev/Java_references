@@ -1,2 +1,2 @@
-# Demo_Code
+# Java: Useful code
 Practice Code
