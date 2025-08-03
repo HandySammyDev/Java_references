@@ -1,16 +1,14 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class ZoomPanPanel extends JPanel {
     private BufferedImage image;
-    private double zoomLevel = 1.0;
+    private double zoom = 1.0;
     private final double MIN_ZOOM = 0.1;
     private final double MAX_ZOOM = 10.0;
 
@@ -30,56 +28,93 @@ public class ZoomPanPanel extends JPanel {
         }
 
         MouseAdapter ma = new MouseAdapter() {
-        }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lastDragPoint = e.getPoint();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                Point p = e.getPoint();
+                //delta in screen coords
+                double dx = p.getX() - lastDragPoint.getX();
+                double dy = p.getY() - lastDragPoint.getY();
+                translateX += dx;
+                translateY += dy;
+                lastDragPoint = p;
+                repaint();
+            }
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                // Zoom factor per wheel notch
+                double delta = e.getPreciseWheelRotation(); //positive = scroll down (zoom out)
+                double scale = Math.pow(1.1, -delta); //inverted so wheel-up zooms in
+
+                //Clamp new zoom
+                double newZoom = zoom * scale;
+                newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, newZoom));
+                scale = newZoom / zoom; // adjust scale if clamped
+                zoom = newZoom;
+
+                // To keep the mouse position stationary, adjust translation
+                Point p = e.getPoint();
+                double px = p.getX();
+                double py = p.getY();
+
+                // transform origin so that after scaling the point under cursor stays
+                translateX = px - scale * (px - translateX);
+                translateY = py - scale * (py - translateY);
+
+                repaint();
+            }
+        };
+
+        addMouseListener(ma);
+        addMouseMotionListener(ma);
+        addMouseListener(ma);
+
+        setBackground(Color.DARK_GRAY);
+        setPreferredSize(new Dimension(800, 600));
     }
 
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if(image == null) return;
 
-        if(image != null){
-            int width = image.getWidth();
-            int height = image.getHeight();
+        Graphics2D g2 = (Graphics2D) g;
 
-            int pixelSize = 1; //You can increase to zoom in on pixels
+        //high quality if like (optional)
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                            RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+                            RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                            RenderingHints.VALUE_ANTIALIAS_ON);
 
-            for(int y=0; y<height; y++){
-                for(int x=0; x<width; x++){
-                    int rgb = image.getRGB(x,y);
-                    Color color = new Color(rgb, true);
+        AffineTransform at = new AffineTransform();
+        at.translate(translateX, translateY);
+        at.scale(zoom, zoom);
+        g2.setTransform(at);
 
-                    int r = color.getRed();
-                    int gVal = color.getGreen();
-                    int b = color.getBlue();
-
-                    //Simple red filter: show only red-dominant pixels
-                    if(r > 150 && gVal < 100 && b < 100){
-                        g.setColor(color); //Keep original
-                    }
-                    else{
-                        g.setColor(Color.WHITE); //or new Color(255, 255, 255, 0) for transparent
-                    }
-
-                    g.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
-                }
-            }
-        }
+        g2.drawImage(image, 0, 0,null);
     }
 
-    public static void filterForRed(){
-
+    public void resetView(){
+        zoom = 1.0;
+        translateX = 0;
+        translateY = 0;
+        repaint();
     }
 
     public static void main(String[] args){
-        JFrame frame = new JFrame("Pixel-by-Pixel Display");
-        ZoomPanPanel panel = new ZoomPanPanel();
-
-        JScrollPane scrollPane = new JScrollPane(panel);
-
+        JFrame frame = new JFrame("Zoom & Pan Demo");
+        ZoomPanPanel panel = new ZoomPanPanel("sun.jpg"); // <-- put actual path
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,600);
         frame.add(panel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        panel.requestFocusInWindow(); //enable key listener
     }
 }
