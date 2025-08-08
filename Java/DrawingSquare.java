@@ -6,6 +6,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
+import static MovingSqaure.Main.myLaunch;
+
 public class DrawingSquare extends JComponent {
     private int width; //100
     private int height; //100
@@ -37,24 +39,26 @@ public class DrawingSquare extends JComponent {
         int X = x+width;
         int Y = y+height;
 
-        for(int rounds = 0; rounds<1; rounds++){
-            int i = 0;
-            while(i<90){
-                i += 10;
-                Random rand = new Random();
-                int r1 = rand.nextInt(256);
-                int r2 = rand.nextInt(256);
-                int r3 = rand.nextInt(256);
+        if(myLaunch.getButtonPressed()){
+            for(int rounds = 0; rounds<1; rounds++){
+                int i = 0;
+                while(i<90){
+                    i += 10;
+                    Random rand = new Random();
+                    int r1 = rand.nextInt(256);
+                    int r2 = rand.nextInt(256);
+                    int r3 = rand.nextInt(256);
 
-                g2d.setTransform(old);
-                g2d.translate(0,0);
+                    g2d.setTransform(old);
+                    g2d.translate(0,0);
 
-                g2d.rotate(Math.toRadians(i), X, Y); // rotate around the bottom-right corner of the rectangle
-                g2d.setColor(new Color(r1,r2,r3));
-                g2d.fill(new Rectangle2D.Double(x, y, width, height));
+                    g2d.rotate(Math.toRadians(i), X, Y); // rotate around the bottom-right corner of the rectangle
+                    g2d.setColor(new Color(r1,r2,r3));
+                    g2d.fill(new Rectangle2D.Double(x, y, width, height));
+                }
+                X += width;
+                x += width;
             }
-            X += width;
-            x += width;
         }
     }
 }

@@ -28,14 +28,22 @@ public class launch extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-    public void isButtonPresses(boolean confirm){
-        
+    private boolean isButtonPressed = false;
+    public void setButtonPresses(boolean confirm){
+        this.isButtonPressed = confirm;
+    }
+    public boolean getButtonPressed(){
+        return isButtonPressed;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==button){
-            isButtonPresses(true);
+            setButtonPresses(true);
+            System.out.println("works");
+        }
+        else{
+            setButtonPresses(false);
         }
     }
 }
