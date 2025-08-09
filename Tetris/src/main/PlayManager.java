@@ -15,7 +15,7 @@ public class PlayManager {
     public PlayManager(){
 
         //Main Play Area frame
-        left_x = (GamePanel.WIDTH) - (WIDTH/2); //1280 - 360/2 = 460
+        left_x = (GamePanel.WIDTH/2) - (WIDTH/2); //1280/2 - 360/2 = 460
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;
@@ -25,5 +25,14 @@ public class PlayManager {
     }
     public void draw(Graphics2D g2){
 
+        //Draw Play Area Frame
+        g2.setColor(Color.white);
+        g2.setStroke(new BasicStroke(4f));
+        g2.drawRect(left_x-4,top_y-4,WIDTH+8,HEIGHT+8);
+
+        // Draw Next Mino Frame
+        int x = right_x + 100;
+        int y = bottom_y - 200;
+        g2.drawRect(x,y,200,400);
     }
 }
