@@ -1,12 +1,16 @@
 package mino;
 
+import main.KeyHandler;
+import main.PlayManager;
+
 import java.awt.*;
 
 public class Mino {
 
     public Block[] b = new Block[4];
     public Block[] tempB = new Block[4];
-    int autoDropCounter = 0;//26.42 in the video
+    int autoDropCounter = 0;
+    public int direction = 1; // There are 4 directions (1/2/3/4)
 
     public void create(Color c){
         b[0] = new Block(c);
@@ -19,9 +23,79 @@ public class Mino {
         tempB[3] = new Block(c);
     }
     public void setXY(int x, int y){}
-    public void update(int directions){}
+    public void updateXY(int direction){
+
+        this.direction = direction;
+        b[0].x = tempB[0].x;
+        b[0].y = tempB[0].y;
+        b[1].x = tempB[1].x;
+        b[1].y = tempB[1].y;
+        b[2].x = tempB[2].x;
+        b[2].y = tempB[2].y;
+        b[3].x = tempB[3].x;
+        b[3].y = tempB[3].y;
+    }
+    public void getDirection1(){
+
+    }
+    public void getDirection2(){
+
+    }
+    public void getDirection3(){
+
+    }
+    public void getDirection4(){
+
+    }
     public void update(){
 
+        // Move the mino
+        if(KeyHandler.upPressed){
+            switch(direction){
+                case 1: getDirection2();break;
+                case 2: getDirection3();break;
+                case 3: getDirection4();break;
+                case 4: getDirection1();break;
+            }
+            KeyHandler.upPressed = false;
+        }
+        if(KeyHandler.downPressed){
+            b[0].y += Block.SIZE;
+            b[1].y += Block.SIZE;
+            b[2].y += Block.SIZE;
+            b[3].y += Block.SIZE;
+
+            // When moved down, reset the autoDropCounter
+            autoDropCounter = 0;
+
+            KeyHandler.downPressed = false;
+        }
+        if(KeyHandler.leftPressed){
+            b[0].x -= Block.SIZE;
+            b[1].x -= Block.SIZE;
+            b[2].x -= Block.SIZE;
+            b[3].x -= Block.SIZE;
+
+            KeyHandler.leftPressed = false;
+        }
+        if(KeyHandler.rightPressed){
+            b[0].x += Block.SIZE;
+            b[1].x += Block.SIZE;
+            b[2].x += Block.SIZE;
+            b[3].x += Block.SIZE;
+
+            KeyHandler.rightPressed = false;
+        }
+
+        autoDropCounter++; // The counter increases in every frame
+        if(autoDropCounter == PlayManager.dropInterval){
+            // The mino goes down
+            b[0].y += Block.SIZE;
+            b[1].y += Block.SIZE;
+            b[2].y += Block.SIZE;
+            b[3].y += Block.SIZE;
+            autoDropCounter = 0; //Reset the counter
+        }
     }
     public void draw(Graphics2D g2){
         // This draws the Mino so you can actually see it on the screen

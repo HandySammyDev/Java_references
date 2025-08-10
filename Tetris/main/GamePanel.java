@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 
 public class GamePanel extends JPanel implements Runnable{
     public static final int WIDTH = 1280;
@@ -16,6 +17,10 @@ public class GamePanel extends JPanel implements Runnable{
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(Color.BLACK);
         this.setLayout(null);
+
+        //Implement KeyListener
+        this.addKeyListener(new KeyHandler()); //KeyHandler class
+        this.setFocusable(true);
 
         pm = new PlayManager();
     }
