@@ -2,7 +2,6 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 
 public class GamePanel extends JPanel implements Runnable{
     public static final int WIDTH = 1280;
