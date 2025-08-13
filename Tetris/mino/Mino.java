@@ -1,5 +1,6 @@
 package mino;
 
+import main.GamePanel;
 import main.KeyHandler;
 import main.PlayManager;
 
@@ -13,6 +14,8 @@ public class Mino {
     public int direction = 1; // There are 4 directions (1/2/3/4)
     boolean leftCollision, rightCollision, bottomCollision;
     public boolean active = true;
+    public boolean deactivating;
+    int deactivateCounter = 0;
 
     public void create(Color c){
         b[0] = new Block(c);
@@ -126,12 +129,16 @@ public class Mino {
             }
             for(int ii=0; ii < b.length; ii++){
                 if(b[ii].x + Block.SIZE == targetX && b[ii].y == targetY){
-                    leftCollision = true;
+                    rightCollision = true;
                 }
             }
         }
     }
     public void update(){
+
+        if(deactivating){
+            deactivating();
+        }
 
         // Move the mino
         if(KeyHandler.upPressed){
@@ -142,6 +149,7 @@ public class Mino {
                 case 4: getDirection1();break;
             }
             KeyHandler.upPressed = false;
+            GamePanel.se.play(1, false);
         }
 
         checkMovementCollision(); //Note: if one of these collision happens,
@@ -186,7 +194,13 @@ public class Mino {
         }
 
         if(bottomCollision){
-            active = false; //deactivate the mino and by pass the old autoDropCounter
+            // without this if-Stat. we will continue to hear the sound until bottomCollision is false
+            if(deactivating == false){
+                GamePanel.se.play(4, false);
+            }
+
+            deactivating = true;
+            //active = false; //deactivate the mino and by pass the old autoDropCounter
         }
         else {
             autoDropCounter++; // The counter increases in every frame
@@ -197,6 +211,22 @@ public class Mino {
                 b[2].y += Block.SIZE;
                 b[3].y += Block.SIZE;
                 autoDropCounter = 0; //Reset the counter
+            }
+        }
+    }
+    private void deactivating(){
+
+        deactivateCounter++;
+
+        // Wait 45 frames until deactivate
+        if(deactivateCounter == 45){
+
+            deactivateCounter = 0; // Reset counter
+            checkMovementCollision(); // Check if the block is still hitting
+
+            // If the bottom is still hitting after 45 frames, deactivate
+            if(bottomCollision){
+                active = false;
             }
         }
     }
