@@ -1,6 +1,6 @@
 package Learning;
 
-public class FactorialRecursiveMethod {
+public class PowerRecursive {
     // Recursive = when a thing is defined in terms of itself.
     //             Apply the result of a procedure, to a procedure.
     //             A recursive method calls itself. Can be a substitute for iteration.
@@ -16,12 +16,12 @@ public class FactorialRecursiveMethod {
     //             ------------
     //             sometimes slower
     //             uses more memory
-    
+
     public static void main(String[] args){
-        System.out.println(factorial(7));
+        System.out.println(power(2, 8));
     }
-    private static int factorial(int num){ // Taking a recursive approach
-        if(num < 1) return 1; // Base case
-        return num * factorial(num - 1); //recursive
+    private static int power(int base, int exponent){
+        if(exponent < 1)return 1; // base case
+        return base * power(base, exponent); //recursive
     }
 }
