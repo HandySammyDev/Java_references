@@ -8,7 +8,8 @@ public class Employee {
 
 
     public Employee(String name, double payRate){
-
+        this.name = name;
+        this.payRate = payRate;
     }
 
 
@@ -31,20 +32,31 @@ public class Employee {
     }
     public double getPay(){
         double totalPay = 0;
+        double totalHours = 0;
+        boolean workedOnWeekend = false;
         double bonus = 50;
 
         for(int i=0; i<hours.length; i++){
             if(i==5 || i==6){
-                totalPay += hours[i] * (payRate*2);
+                workedOnWeekend = true;
+                break;
             }
-            else {
-                if(getTotalHours()>40){
-                    totalPay += hours[i] * (payRate * 1.5);
-                }
-                else {
-                    totalPay += hours[i] * payRate;
-                }
-            }
+
+            totalHours += hours[i];
+        }
+
+        if(totalHours <= 40){
+            totalPay += totalHours * payRate;
+        }
+        else if(totalHours > 40){
+            double overTime = totalHours - 40;
+            totalPay += 40 * payRate;
+            totalPay += overTime * (payRate*1.5);
+        }
+
+        if(workedOnWeekend){
+            double weekendHours = hours[5] + hours[6];
+            totalPay += weekendHours * (payRate*2);
         }
 
         if(getNumDaysWorked()==7){
@@ -53,6 +65,7 @@ public class Employee {
 
         return totalPay;
     }
+
     public double getPayRate(){
         return payRate;
     }
@@ -96,21 +109,20 @@ public class Employee {
         if(day>=0 && day<=6){
             this.hours[day] = hours;
         }
-        //Sets the hours worked on day i. You can assume 0<=i<=6 and that hours>=0
     }
 
     @Override
     public String toString(){
         return String.format(
                 "Pay Stub\n" +
-                "--------" +
-                "Name:%s, Pay Rate $%.2f" +
-                "Hours:Mon:%.2f Tue:%.2f Wed:%.2f Thu:%.2f Fri:%.2f Sat:%.2f Sun:%.2f" +
-                "Days worked:%d, Total Hours:%.2f" +
-                "Weekdays hours:%.2f, Weekend hours: %.2f" +
-                "Total pay: $%.2f",
-                name,
-                hours[0], hours[1], hours[2], hours[3], hours[4], hours[5], hours[6],
+                "--------\n" +
+                "Name:%s, Pay Rate $%.2f\n" +
+                "Hours:Mon:%.2f Tue:%.2f Wed:%.2f Thu:%.2f Fri:%.2f Sat:%.2f Sun:%.2f\n" +
+                "Days worked:%d, Total Hours:%.2f\n" +
+                "Weekdays hours:%.2f, Weekend hours: %.2f\n" +
+                "Total pay: $%.2f\n",
+                getName(), getPayRate(),
+                getHours(0),getHours(1),getHours(2),getHours(3),getHours(4),getHours(5),getHours(6),
                 getNumDaysWorked(), getTotalHours(),
                 getWeekdayHours(), getWeekendHours(),
                 getPay()

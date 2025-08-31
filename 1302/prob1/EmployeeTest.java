@@ -11,13 +11,13 @@ public class EmployeeTest {
 		testMergeEmployee();
 		testGetPay_0_weekday_0_weekend();
 		testGetPay_lessthan40_weekday_0_weekend();
-//		testGetPay_lessthan40_weekday_greaterthan0_weekend();
-//		testGetPay_equalto40_weekday_0_weekend();
-//		testGetPay_greaterthan40_weekday_0_weekend();
-//		testGetPay_greaterthan40_weekday_greaterthan0_weekend();
-//		testGetPay_lessthan40_weekday_greaterthan0_weekend_7_days();
-//		testGetPay_greaterthan40_weekday_greaterthan0_weekend_7_days();
-//		testToString();
+		testGetPay_lessthan40_weekday_greaterthan0_weekend();
+		testGetPay_equalto40_weekday_0_weekend();
+		testGetPay_greaterthan40_weekday_0_weekend();
+		testGetPay_greaterthan40_weekday_greaterthan0_weekend();
+		testGetPay_lessthan40_weekday_greaterthan0_weekend_7_days();
+		testGetPay_greaterthan40_weekday_greaterthan0_weekend_7_days();
+		testToString();
 	}
 
 	public static void testGetNumDaysWorked() {
@@ -104,117 +104,117 @@ public class EmployeeTest {
 		System.out.println(report);
 	}
 
-//	public static void testGetPay_lessthan40_weekday_greaterthan0_weekend() {
-//		System.out.println("\n-->testGetPay_lessthan40_weekday_greaterthan0_weekend()");
-//		Employee e;
-//		e = new Employee("Waldo", 25.0);
-//		e.setHours(0, 8);
-//		e.setHours(1, 8);
-//		e.setHours(2, 8);
-//		e.setHours(6, 8);
-//
-//		String report =  String.format("Expected: getPay()=$%,.2f\n", 1000.0);
-//		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
-//		System.out.println(report);
-//	}
-//
-//	public static void testGetPay_equalto40_weekday_0_weekend() {
-//		System.out.println("\n-->testGetPay_equalto40_weekday_0_weekend()");
-//		Employee e;
-//		e = new Employee("Salvatore", 25.0);
-//		e.setHours(0, 8);
-//		e.setHours(1, 8);
-//		e.setHours(2, 8);
-//		e.setHours(3, 8);
-//		e.setHours(4, 8);
-//
-//		String report =  String.format("Expected: getPay()=$%,.2f\n", 1000.0);
-//		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
-//		System.out.println(report);
-//	}
-//
-//	public static void testGetPay_greaterthan40_weekday_0_weekend() {
-//		System.out.println("\n-->testGetPay_greaterthan40_weekday_0_weekend()");
-//		Employee e;
-//		e = new Employee("Delia", 25.0);
-//		e.setHours(0, 8);
-//		e.setHours(1, 8);
-//		e.setHours(2, 8);
-//		e.setHours(3, 8);
-//		e.setHours(4, 10);
-//
-//		String report =  String.format("Expected: getPay()=$%,.2f\n", 1075.0);
-//		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
-//		System.out.println(report);
-//	}
-//
-//	public static void testGetPay_greaterthan40_weekday_greaterthan0_weekend() {
-//		System.out.println("\n-->testGetPay_greaterthan40_weekday_0_weekend()");
-//		Employee e;
-//		e = new Employee("Nate", 25.0);
-//		e.setHours(0, 8);
-//		e.setHours(1, 8);
-//		e.setHours(2, 8);
-//		e.setHours(3, 8);
-//		e.setHours(4, 10);
-//		e.setHours(5, 2);
-//
-//		String report =  String.format("Expected: getPay()=$%,.2f\n", 1175.0);
-//		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
-//		System.out.println(report);
-//	}
-//
-//	public static void testGetPay_lessthan40_weekday_greaterthan0_weekend_7_days() {
-//		System.out.println("\n-->testGetPay_lessthan40_weekday_greaterthan0_weekend_7_days()");
-//		Employee e;
-//		e = new Employee("Bisley", 25.0);
-//		e = new Employee("Orin", 25.0);
-//		e.setHours(0, 4);
-//		e.setHours(1, 4);
-//		e.setHours(2, 4);
-//		e.setHours(3, 4);
-//		e.setHours(4, 4);
-//		e.setHours(5, 2);
-//		e.setHours(6, 2);
-//
-//		String report =  String.format("Expected: getPay()=$%,.2f\n", 750.0);
-//		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
-//		System.out.println(report);
-//	}
-//
-//	public static void testGetPay_greaterthan40_weekday_greaterthan0_weekend_7_days() {
-//		System.out.println("\n-->testGetPay_greaterthan40_weekday_greaterthan0_weekend_7_days()");
-//		Employee e;
-//		e = new Employee("Bisley", 25.0);
-//		e.setHours(0, 10);
-//		e.setHours(1, 8);
-//		e.setHours(2, 8);
-//		e.setHours(3, 8);
-//		e.setHours(4, 8);
-//		e.setHours(5, 2);
-//		e.setHours(6, 2);
-//
-//		String report =  String.format("Expected: getPay()=$%,.2f\n", 1325.0);
-//		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
-//		System.out.println(report);
-//	}
-//
-//	public static void testToString() {
-//		System.out.println("\n-->testToString()");
-//		Employee e;
-//		e = new Employee("Bisley", 25.0);
-//		e.setHours(0, 10);
-//		e.setHours(1, 8);
-//		e.setHours(2, 8);
-//		e.setHours(3, 8);
-//		e.setHours(4, 8);
-//		e.setHours(5, 2);
-//		e.setHours(6, 2);
-//
-//		System.out.println(e);
-//	}
-//
-//
+	public static void testGetPay_lessthan40_weekday_greaterthan0_weekend() {
+		System.out.println("\n-->testGetPay_lessthan40_weekday_greaterthan0_weekend()");
+		Employee e;
+		e = new Employee("Waldo", 25.0);
+		e.setHours(0, 8);
+		e.setHours(1, 8);
+		e.setHours(2, 8);
+		e.setHours(6, 8);
+
+		String report =  String.format("Expected: getPay()=$%,.2f\n", 1000.0);
+		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
+		System.out.println(report);
+	}
+
+	public static void testGetPay_equalto40_weekday_0_weekend() {
+		System.out.println("\n-->testGetPay_equalto40_weekday_0_weekend()");
+		Employee e;
+		e = new Employee("Salvatore", 25.0);
+		e.setHours(0, 8);
+		e.setHours(1, 8);
+		e.setHours(2, 8);
+		e.setHours(3, 8);
+		e.setHours(4, 8);
+
+		String report =  String.format("Expected: getPay()=$%,.2f\n", 1000.0);
+		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
+		System.out.println(report);
+	}
+
+	public static void testGetPay_greaterthan40_weekday_0_weekend() {
+		System.out.println("\n-->testGetPay_greaterthan40_weekday_0_weekend()");
+		Employee e;
+		e = new Employee("Delia", 25.0);
+		e.setHours(0, 8);
+		e.setHours(1, 8);
+		e.setHours(2, 8);
+		e.setHours(3, 8);
+		e.setHours(4, 10);
+
+		String report =  String.format("Expected: getPay()=$%,.2f\n", 1075.0);
+		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
+		System.out.println(report);
+	}
+
+	public static void testGetPay_greaterthan40_weekday_greaterthan0_weekend() {
+		System.out.println("\n-->testGetPay_greaterthan40_weekday_0_weekend()");
+		Employee e;
+		e = new Employee("Nate", 25.0);
+		e.setHours(0, 8);
+		e.setHours(1, 8);
+		e.setHours(2, 8);
+		e.setHours(3, 8);
+		e.setHours(4, 10);
+		e.setHours(5, 2);
+
+		String report =  String.format("Expected: getPay()=$%,.2f\n", 1175.0);
+		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
+		System.out.println(report);
+	}
+
+	public static void testGetPay_lessthan40_weekday_greaterthan0_weekend_7_days() {
+		System.out.println("\n-->testGetPay_lessthan40_weekday_greaterthan0_weekend_7_days()");
+		Employee e;
+		e = new Employee("Bisley", 25.0);
+		e = new Employee("Orin", 25.0);
+		e.setHours(0, 4);
+		e.setHours(1, 4);
+		e.setHours(2, 4);
+		e.setHours(3, 4);
+		e.setHours(4, 4);
+		e.setHours(5, 2);
+		e.setHours(6, 2);
+
+		String report =  String.format("Expected: getPay()=$%,.2f\n", 750.0);
+		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
+		System.out.println(report);
+	}
+
+	public static void testGetPay_greaterthan40_weekday_greaterthan0_weekend_7_days() {
+		System.out.println("\n-->testGetPay_greaterthan40_weekday_greaterthan0_weekend_7_days()");
+		Employee e;
+		e = new Employee("Bisley", 25.0);
+		e.setHours(0, 10);
+		e.setHours(1, 8);
+		e.setHours(2, 8);
+		e.setHours(3, 8);
+		e.setHours(4, 8);
+		e.setHours(5, 2);
+		e.setHours(6, 2);
+
+		String report =  String.format("Expected: getPay()=$%,.2f\n", 1325.0);
+		       report += String.format("  Actual: getPay()=$%,.2f", e.getPay());
+		System.out.println(report);
+	}
+
+	public static void testToString() {
+		System.out.println("\n-->testToString()");
+		Employee e;
+		e = new Employee("Bisley", 25.0);
+		e.setHours(0, 10);
+		e.setHours(1, 8);
+		e.setHours(2, 8);
+		e.setHours(3, 8);
+		e.setHours(4, 8);
+		e.setHours(5, 2);
+		e.setHours(6, 2);
+
+		System.out.println(e);
+	}
+
+
 //	/*
 //	 * Private helper methods below
 //	 */
