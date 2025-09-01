@@ -128,15 +128,15 @@ public class BasketballPlayer {
                 "   Free Throws: made: %d, attempted: %d, percent: %.1f%n" +
                 "    2 Pointers: made: %d, attempted: %d, percent: %.1f%n" +
                 "Three Pointers: made: %d, attempted: %d, percent: %.1f%n",
-                name, getTotalPoints(),
-                freeThrowsMade, freeThrowsAttempted, getFreeThrowPercent(),
-                twoPointersMade, twoPointersAttempted, getTwoPointerPercent(),
-                threePointersMade, threePointersAttempted, getTwoPointerPercent()
+                getName(), getTotalPoints(),
+                getFreeThrowsMade(), getFreeThrowsAttempted(), getFreeThrowPercent(),
+                getTwoPointersMade(), getTwoPointersAttempted(), getTwoPointerPercent(),
+                getThreePointersMade(), getThreePointersAttempted(), getThreePointerPercent()
                 );
     }
 
     public static void main(String[] args){
         BasketballPlayer p = new BasketballPlayer("Walker");
-        System.out.println(p + " Hello");
+        System.out.println(p);
     }
 }
