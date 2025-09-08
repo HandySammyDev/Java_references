@@ -26,8 +26,10 @@ public class Store {
         numEmps++;
     }
     public Employee getEmployee(int i){
+        if(i<0 || i>numEmps){
+            return null;
+        }
         return emps[i];
-        //Might need an if-else to return null or avoid error (outtaBoundError)
     }
     public Employee getEmployeeWithName(String findName){
         for(int i=0; i<numEmps; i++){
@@ -63,7 +65,7 @@ public class Store {
     public Employee removeEmployee(int i){
         Employee e;
 
-        if(emps[i] == null){
+        if(i < 0 || emps[i] == null){
             return null;
         }
         else{
@@ -71,14 +73,11 @@ public class Store {
             emps[i] = null;
         }
 
-        for(int j=0; j<numEmps; j++){
-            if(j+1 > numEmps){
-                break;
-            }
+        for(int j=i; j<numEmps-1; j++){
             emps[j] = emps[j+1];
         }
-        numEmps--;
 
+        numEmps--;
         return e;
     }
 
