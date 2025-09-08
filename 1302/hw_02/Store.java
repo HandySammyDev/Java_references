@@ -1,10 +1,17 @@
 package prob1;
+import emp.Employee;
 
-//
+//“This homework represents my own work.
+// I understand that I may receive help, but I did not copy any portion of this assignment from anywhere.
+// I understand that a violation of this will result in a Report of Academic Dishonesty.— Samuel Perez-Hernandez”
 
 public class Store {
 
-    private Employee[] emps;
+    // Add the three instance variables to the Store class.
+    // MAKE THE hours INSTANCE VARIABLE PROTECTED, NOT PRIVATE.
+    // protected Employee emps[] = new Employee[20];
+
+    private Employee[] emps = new Employee[20];
     private int numEmps;
 
     Store(){
@@ -12,33 +19,82 @@ public class Store {
     }
 
     public void addEmployee(Employee e){
-
+        if(numEmps == emps.length){
+            return;
+        }
+        emps[numEmps] = e;
+        numEmps++;
     }
     public Employee getEmployee(int i){
-
+        return emps[i];
+        //Might need an if-else to return null or avoid error (outtaBoundError)
     }
     public Employee getEmployeeWithName(String findName){
-
+        for(int i=0; i<numEmps; i++){
+            if(emps[i].getName().equals(findName)){
+                return emps[i];
+            }
+        }
+        return null;
     }
     public int getNumEmployees(){
-
+        return numEmps;
     }
     public double getTotalHours(){
 
+        double totalHours = 0;
+
+        for(int i=0; i<numEmps; i++){
+            totalHours += emps[i].getTotalHours();
+        }
+
+        return totalHours;
     }
     public double getTotalPay(){
 
-    }
-    public Employee removeEmployee(){
+        double totalPay = 0;
 
+        for(int i=0; i<numEmps; i++){
+            totalPay += emps[i].getPay();
+        }
+
+        return totalPay;
+    }
+    public Employee removeEmployee(int i){
+        Employee e;
+
+        if(emps[i] == null){
+            return null;
+        }
+        else{
+            e = emps[i];
+            emps[i] = null;
+        }
+
+        for(int j=0; j<numEmps; j++){
+            if(j+1 > numEmps){
+                break;
+            }
+            emps[j] = emps[j+1];
+        }
+        numEmps--;
+
+        return e;
     }
 
     @Override
     public String toString(){
-        return "";
-    }
 
-    public static void main(String[] args){
+        StringBuilder allEmployeeToStrings = new StringBuilder();
 
+        for(int i=0; i<numEmps; i++){
+            allEmployeeToStrings.append(emps[i]);
+        }
+
+        return String.format(
+                "Payroll Report\n\n" +
+                "Num Employees:%d, total hrs:%.2f, total pay=$%.2f\n\n" +
+                allEmployeeToStrings,
+                getNumEmployees(), getTotalHours(), getTotalPay());
     }
 }

@@ -1,6 +1,6 @@
 package prob1;
 
-import emps.Employee;
+//import emps.Employee;
 
 /**
  * 1.  This class should compile before turning in your assignment. 
@@ -25,26 +25,26 @@ import emps.Employee;
  * 4.  If you need to correct the spelling of a method, be sure and use: Refactor/Rename, which changes all
  *     occurrences in all files. See Lab 2 if needed. 
  */ 
-public class HW02CompileTest {
-	public static void main(String[] args) {
-		testCompileStore();
-		System.out.println("--> All methods have correct signature");
-	}
-	
-	private static void testCompileStore() {
-		Store s = new Store();
-		Employee e1 = new Employee("Will", 23.0);
-		e1.setHours(1, 10);
-		s.addEmployee(e1);
-		Employee e2 = new Employee("Shay", 55.0);
-		s.addEmployee(e2);
-		int num = s.getNumEmployees();
-		Employee e3 = s.getEmployee(0);
-		Employee e4 = s.getEmployeeWithName("Shay");
-		double totalHours = s.getTotalHours();
-		double totalPay = s.getTotalPay();
-		Employee e = s.removeEmployee(1);
-		String searchFor = "Ben";
-		System.out.println(s);
-	}
-}
+//public class HW02CompileTest {
+//	public static void main(String[] args) {
+//		testCompileStore();
+//		System.out.println("--> All methods have correct signature");
+//	}
+//
+//	private static void testCompileStore() {
+//		Store s = new Store();
+//		Employee e1 = new Employee("Will", 23.0);
+//		e1.setHours(1, 10);
+//		s.addEmployee(e1);
+//		Employee e2 = new Employee("Shay", 55.0);
+//		s.addEmployee(e2);
+//		int num = s.getNumEmployees();
+//		Employee e3 = s.getEmployee(0);
+//		Employee e4 = s.getEmployeeWithName("Shay");
+//		double totalHours = s.getTotalHours();
+//		double totalPay = s.getTotalPay();
+//		Employee e = s.removeEmployee(1);
+//		String searchFor = "Ben";
+//		System.out.println(s);
+//	}
+//}
