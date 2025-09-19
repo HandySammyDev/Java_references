@@ -52,7 +52,7 @@ public class PlayAreaPanel extends JPanel {
 
         g2.setColor(Color.white);
         g2.setStroke(new BasicStroke(4f));
-        g2.drawRect((GamePanel.WIDTH/2) + WIDTH, (GamePanel.HEIGHT/2) - HEIGHT/2,
-                WIDTH, HEIGHT);
+        g2.drawRect((GamePanel.WIDTH/2) + WIDTH/3, (GamePanel.HEIGHT/2) - HEIGHT/2,
+                WIDTH/2, HEIGHT/2);
     }
 }
