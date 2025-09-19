@@ -1,20 +1,22 @@
-package TicTakToe;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    public final int WIDTH = 500;
-    public final int HEIGHT = 500;
-    final int FPS = 60;
-    Thread gameThread;
+    public static final int WIDTH = 1200;
+    public static final int HEIGHT = 720;
+    private final int FPS = 60;
+    private Thread gameThread;
+    private PlayAreaPanel pa = new PlayAreaPanel();
 
     public GamePanel(){
 
         this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
         this.setBackground(Color.black);
         this.setLayout(null);
+
+        this.add(pa);
     }
 
     public void launchGame(){
@@ -44,11 +46,12 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     private void update(){
-
+        pa.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        pa.draw(g2);
     }
 }
