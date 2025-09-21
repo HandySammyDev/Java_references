@@ -9,6 +9,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final int FPS = 60;
     private Thread gameThread;
     private PlayAreaPanel pa = new PlayAreaPanel();
+    private ButtonsPanel bp = new ButtonsPanel();
 
     public GamePanel(){
 
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setLayout(null);
 
         this.add(pa);
+        this.add(bp);
     }
 
     public void launchGame(){
