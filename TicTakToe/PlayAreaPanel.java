@@ -1,7 +1,9 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 public class PlayAreaPanel extends JPanel {
 
@@ -11,6 +13,7 @@ public class PlayAreaPanel extends JPanel {
 
     private JLabel activeLabel = null;
 
+    private boolean gameStart;
     private boolean isClicked;
     private boolean oTurn;
     private boolean xTurn;
@@ -52,16 +55,17 @@ public class PlayAreaPanel extends JPanel {
         setLayout(new GridLayout(3,3));
         setBounds((GamePanel.WIDTH/2) - WIDTH, (GamePanel.HEIGHT/2) - HEIGHT/2,
                 WIDTH, HEIGHT);
-        setBackground(Color.BLUE);
+        setBackground(Color.WHITE);
         createLabels();
     }
 
     public void createLabels(){
         for(int i=0; i<9; i++){
-            JLabel label = new JLabel("" + i);
+            JLabel label = new JLabel();
             label.setFont(new Font(null, Font.BOLD, 200));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             label.setVerticalAlignment(SwingConstants.CENTER);
+            label.setBorder(new LineBorder(Color.BLACK));
             labels[i] = label;
 
             label.addMouseListener(new MouseAdapter() {
@@ -75,6 +79,16 @@ public class PlayAreaPanel extends JPanel {
             this.add(label);
         }
     }
+    public void coinFlip(){
+        Random rand = new Random();
+        int randomNum = rand.nextInt(2);
+        if(randomNum == 0){
+            oTurn = true;
+        }
+        else{
+            xTurn = true;
+        }
+    }
     public void changeLabel(){
 
     }
@@ -82,6 +96,8 @@ public class PlayAreaPanel extends JPanel {
 
     }
     public void draw(Graphics2D g2){
+        String playerTurn = "";
+
         g2.setColor(Color.white);
         g2.setStroke(new BasicStroke(4f));
         g2.setFont(new Font("Arial", Font.PLAIN, 60));
@@ -103,6 +119,20 @@ public class PlayAreaPanel extends JPanel {
         g2.drawString("" + scoreX, X_ScorePoints_AlignmentX, X_ScorePoints_AlignmentY);
 
         g2.drawRect(timerBoard_AlignmentX, timerBoard_AlignmentY, timerBoardWidth, timerBoardHeight);
-        g2.drawString("Timer: " + timer, timerText_AlignmentX, timerText_AlignmentY);
+
+        if(gameStart){
+            coinFlip();
+            gameStart = false;
+        }
+
+        if(oTurn){
+            playerTurn = "O";
+            oTurn = false;
+        }
+        else if (xTurn) {
+            playerTurn = "X";
+            xTurn = false;
+        }
+        g2.drawString("Turn: " + playerTurn, timerText_AlignmentX, timerText_AlignmentY);
     }
 }
