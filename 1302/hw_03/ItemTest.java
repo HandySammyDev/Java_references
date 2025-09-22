@@ -18,7 +18,7 @@ public class ItemTest {
 		String name = i.getName();
 		double weight = i.getWeight();
 		String expected = "name=Cookie, weight=1.50";
-		String actual = "name=" + name + ", weight=" + weight;
+		String actual = String.format("name=%s, weight=%.2f", name, weight);
 
 		System.out.println(expected + "\n" + actual);
 	}
@@ -27,17 +27,26 @@ public class ItemTest {
 	 * Verify that the cost method works correctly.
 	 */
 	public static void testItemCost() {
-		System.out.println("-->testItemCost"); 
-		System.out.println("NOT IMPLEMENTED"); 
+		System.out.println("-->testItemCost");
+		Item i = new Item("Cookie", 2.50);
+		double cost = i.cost();
+		String expected = "cost=5.0";
+		String actual = "cost=" + cost;
+
+		System.out.println(expected + "\n" + actual);
 	}
 
 	/**
 	 * Verify that the toString method produces a string exactly
-	 * as specified in the assignment document. 
+	 * as specified in the assignment document.
 	 */
 	public static void testToString() {
-		System.out.println("-->testToString"); 
-		System.out.println("NOT IMPLEMENTED"); 
-	}
+		System.out.println("-->testToString");
 
+		Item i = new Item("Apple", .50);
+		String expected = "name=Apple, cost=$1.00, weight=0.50";
+		String actual = i.toString();
+
+		System.out.println(expected + "\n" + actual);
+	}
 }

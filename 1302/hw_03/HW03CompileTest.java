@@ -30,37 +30,37 @@ public class HW03CompileTest {
 //		testCompileWarehouse();
 		System.out.println("All methods have correct signature");
 	}
-//
-//	private static void testCompileItem() {
-//		Item b = new Item("Book", 5.00);
-//		double cost = b.cost();
-//		String name = b.getName();
-//		double wt = b.getWeight();
-//		String msg = b.toString();
-//	}
-//
-//	public static void testCompileRefrigeratedItem() {
-//		RefrigeratedItem b = new RefrigeratedItem("Coke", 5.00, 7.00);
-//		double cost = b.cost();
-//		String name = b.getName();
-//		double wt = b.getWeight();
-//		double temp = b.getTemp();
-//		String msg = b.toString();
-//		Item e1 = new Item("Coke", 23.0);
-//		RefrigeratedItem b2 = new RefrigeratedItem(e1, 7.00);
-//
-//	}
-//
-//	public static void testCompileWarehouse() {
-//		Warehouse s = new Warehouse();
-//		Item e1 = new Item("Coke", 23.0);
-//		int num = s.getNumItems();
-//		s.addItem(e1);
-//		Item i = s.getItem(0);
-//		Item i2 = s.getItem("Coke");
-//		double cost = s.getTotalCost();
-//		double temp = s.getAverageTemp();
-//		double cost2 = s.getTotalCostRefrigerated();
-//		RefrigeratedItem[] refs = s.getRefrigeratedItems();
-//	}
+
+	private static void testCompileItem() {
+		Item b = new Item("Book", 5.00);
+		double cost = b.cost();
+		String name = b.getName();
+		double wt = b.getWeight();
+		String msg = b.toString();
+	}
+
+	public static void testCompileRefrigeratedItem() {
+		RefrigeratedItem b = new RefrigeratedItem("Coke", 5.00, 7.00);
+		double cost = b.cost();
+		String name = b.getName();
+		double wt = b.getWeight();
+		double temp = b.getTemp();
+		String msg = b.toString();
+		Item e1 = new Item("Coke", 23.0);
+		RefrigeratedItem b2 = new RefrigeratedItem(e1, 7.00);
+
+	}
+
+	public static void testCompileWarehouse() {
+		Warehouse s = new Warehouse();
+		Item e1 = new Item("Coke", 23.0);
+		int num = s.getNumItems();
+		s.addItem(e1);
+		Item i = s.getItem(0);
+		Item i2 = s.getItem("Coke");
+		double cost = s.getTotalCost();
+		double temp = s.getAverageTemp();
+		double cost2 = s.getTotalCostRefrigerated();
+		RefrigeratedItem[] refs = s.getRefrigeratedItems();
+	}
 }

@@ -13,8 +13,14 @@ public class RefrigeratedItemTest {
 	 * Verify that the name, weight, & temp are initialized with the main constructor.
 	 */
 	public static void testConstructorMain() {
-		System.out.println("-->testConstructorMain"); 
-		System.out.println("NOT IMPLEMENTED"); 
+		System.out.println("-->testConstructorMain");
+
+		RefrigeratedItem ri = new RefrigeratedItem("Ice Cream", 1.50, 3.2);
+		String name = ri.getName();
+		double weight = ri.getWeight();
+		double temperature = ri.getTemperature();
+		String expected = "name=Cookie, weight=1.50";
+		String actual = String.format("name=%s, weight=%.2f", name, weight);
 	}
 
 	/**
