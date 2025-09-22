@@ -4,7 +4,7 @@ public class RefrigeratedItem extends Item {
 
     private double temperature;
 
-    public double getTemperature() {
+    public double getTemp() {
         return temperature;
     }
 
@@ -13,9 +13,8 @@ public class RefrigeratedItem extends Item {
         this.temperature = temperature;
     }
 
-    public RefrigeratedItem(double temperature, Item item) {
+    public RefrigeratedItem(Item item, double temperature) {
         this(item.getName(), item.getWeight(), temperature);
-        RefrigeratedItem refrigeratedItem = (RefrigeratedItem) item;
     }
 
     @Override
@@ -25,6 +24,6 @@ public class RefrigeratedItem extends Item {
     public String toString(){
         return String.format
                 ("name=%s, cost=$%.2f, weight=%.2f, temp=%.2f degrees",
-                getName(), cost(), getWeight(), getTemperature());
+                getName(), cost(), getWeight(), getTemp());
     }
 }
