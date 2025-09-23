@@ -1,4 +1,8 @@
 package prob1;
+//“This homework represents my own work. I understand that I may receive help,
+// but I did not copy any portion of this assignment from anywhere.
+// I understand that a violation of this will result in a Report of Academic Dishonesty.
+// —Samuel Perez-Hernandez”
 
 public class Warehouse {
 
@@ -54,9 +58,7 @@ public class Warehouse {
         double totalCost = 0.0;
 
         for(int i=0; i<numItems; i++){
-            if(!(items[i] instanceof RefrigeratedItem)){
-                totalCost += items[i].cost();
-            }
+            totalCost += items[i].cost();
         }
         return totalCost;
     }
@@ -97,23 +99,46 @@ public class Warehouse {
         }
         return r;
     }
-//    public Item removeItem(int i){
-//        if(items[i] != null){
-//            Item item = items[i];
-//            for(int j = i; j>=0; j--){
-//                Item itemTemp = items[j];
-//                items[j-1] = itemTemp;
-//            }
-//            numItems--;
-//            return items[i];
-//        }
-//        else{
-//            return null;
-//        }
-//    }
-//    public Item removeItem(String name){
-//        if(){
-//
-//        }
-//    }
+    public Item removeItem(int i){
+        if(i>numItems || i<0){
+                return null;
+        }
+        Item item = items[i];
+        for(int j = i; j<numItems; j++){
+            if(j==items.length-1){
+                items[j] = null;
+            }
+            else {
+                items[j] = items[j+1];
+            }
+        }
+        numItems--;
+        return item;
+    }
+    public Item removeItem(String name){
+        for(int i=0; i<numItems; i++){
+            if(items[i].getName().equals(name)){
+                return removeItem(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        for(int i=0; i<numItems; i++){
+            if(items[i] instanceof RefrigeratedItem){
+                sb.append(String.format("name=%s, cost=$%.2f, weight=%.2f, temp=%.2f degrees\n",
+                        items[i].getName(), items[i].cost(), items[i].getWeight(), ((RefrigeratedItem) items[i]).getTemp()));
+            }
+            else {
+                sb.append(String.format("name=%s, cost=$%.2f, weight=%.2f\n",
+                        items[i].getName(), items[i].cost(), items[i].getWeight()));
+            }
+        }
+
+        return sb.toString();
+    }
 }

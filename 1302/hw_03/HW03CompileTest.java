@@ -25,9 +25,9 @@ package prob1;
  */ 
 public class HW03CompileTest {
 	public static void main(String[] args) {
-//		testCompileItem();
-//		testCompileRefrigeratedItem();
-//		testCompileWarehouse();
+		testCompileItem();
+		testCompileRefrigeratedItem();
+		testCompileWarehouse();
 		System.out.println("All methods have correct signature");
 	}
 
@@ -50,16 +50,16 @@ public class HW03CompileTest {
 		RefrigeratedItem b2 = new RefrigeratedItem(e1, 7.00);
 	}
 
-//	public static void testCompileWarehouse() {
-//		Warehouse s = new Warehouse();
-//		Item e1 = new Item("Coke", 23.0);
-//		int num = s.getNumItems();
-//		s.addItem(e1);
-//		Item i = s.getItem(0);
-//		Item i2 = s.getItem("Coke");
-//		double cost = s.getTotalCost();
-//		double temp = s.getAverageTemp();
-//		double cost2 = s.getTotalCostRefrigerated();
-//		RefrigeratedItem[] refs = s.getRefrigeratedItems();
-//	}
+	public static void testCompileWarehouse() {
+		Warehouse s = new Warehouse();
+		Item e1 = new Item("Coke", 23.0);
+		int num = s.getNumItems();
+		s.addItem(e1);
+		Item i = s.getItem(0);
+		Item i2 = s.getItem("Coke");
+		double cost = s.getTotalCost();
+		double temp = s.getAverageTemp();
+		double cost2 = s.getTotalCostRefrigerated();
+		RefrigeratedItem[] refs = s.getRefrigeratedItems();
+	}
 }
