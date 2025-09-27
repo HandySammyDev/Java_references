@@ -13,7 +13,6 @@ public class PlayAreaPanel extends JPanel {
 
     private JLabel activeLabel = null;
 
-    private boolean gameStart;
     private boolean isClicked;
     private boolean oTurn;
     private boolean xTurn;
@@ -71,9 +70,7 @@ public class PlayAreaPanel extends JPanel {
             label.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-
                     activeLabel = label;
-                    System.out.println(label.getText());
                 }
             });
             this.add(label);
@@ -105,24 +102,19 @@ public class PlayAreaPanel extends JPanel {
 
         g2.drawRect(scoreBoardO_AlignmentX, scoreBoardO_AlignmentY, scoreBoardWidth, scoreBoardHeight);
         g2.drawRect(scoreBoardX_AlignmentX, scoreBoardX_AlignmentY, scoreBoardWidth, scoreBoardHeight);
-
         g2.drawString("Score:", scoreText_AlignmentX, scoreText_AlignmentY);
-
         g2.setColor(Color.CYAN);
         g2.drawString("O:", O_Text_AlignmentX, O_Text_AlignmentY);
-
         g2.setColor(Color.RED);
         g2.drawString("X:", X_Text_AlignmentX, X_Text_AlignmentY);
-
         g2.setColor(Color.WHITE);
         g2.drawString("" + scoreO, O_ScorePoints_AlignmentX, O_ScorePoints_AlignmentY);
         g2.drawString("" + scoreX, X_ScorePoints_AlignmentX, X_ScorePoints_AlignmentY);
-
         g2.drawRect(timerBoard_AlignmentX, timerBoard_AlignmentY, timerBoardWidth, timerBoardHeight);
 
-        if(gameStart){
+        if(GamePanel.gameStart){
             coinFlip();
-            gameStart = false;
+            GamePanel.gameStart = false;
         }
 
         if(oTurn){

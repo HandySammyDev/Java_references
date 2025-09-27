@@ -10,6 +10,7 @@ public class GamePanel extends JPanel implements Runnable{
     private Thread gameThread;
     private PlayAreaPanel pa = new PlayAreaPanel();
     private ButtonsPanel bp = new ButtonsPanel();
+    public static boolean gameStart = false;
 
     public GamePanel(){
 
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void launchGame(){
         gameThread = new Thread(this);
         gameThread.start();
+        gameStart = true;
     }
 
     @Override
