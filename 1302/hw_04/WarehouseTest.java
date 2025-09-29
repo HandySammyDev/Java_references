@@ -1,4 +1,6 @@
-package hw_04.prob1;
+package prob1;
+
+import java.util.ArrayList;
 
 // “This homework represents my own work.
 // I understand that I may receive help, but I did not copy any portion of this assignment from anywhere.
@@ -22,6 +24,11 @@ public class WarehouseTest {
 		testRemoveItem_WithName();
 		testRemoveItem_WithoutName();
 		testToString();
+
+		testAddItem_Duplicate();
+		testGetItemsWithName();
+		testHasItem_Find();
+		testHasItem_NoFind();
 	}
 	
 	/**
@@ -209,10 +216,10 @@ public class WarehouseTest {
 		System.out.println("-->testGetRefrigeratedItems");
 
 		Warehouse w = createFiveItems();
-		RefrigeratedItem[] r = w.getRefrigeratedItems();
+		ArrayList<RefrigeratedItem> r = w.getRefrigeratedItems();
 		String expected = "Expected names=Chicken, Beef, Yogurt";
 		String actual = String.format("Actual names=%s, %s, %s",
-				r[0].getName(), r[1].getName(), r[2].getName());
+				r.getFirst().getName(), r.get(1).getName(), r.get(2).getName());
 
 		System.out.println(expected);
 		System.out.println(actual + "\n");
@@ -357,6 +364,78 @@ public class WarehouseTest {
 		System.out.println("Actual=\n" + actual);
 	}
 
+
+	//9.Add a test method, testAddItem_Duplicate for addItem to
+	// ensure that it will not add a duplicate Item.
+
+	public static void testAddItem_Duplicate(){
+		System.out.println("-->testAddItem_Duplicate");
+
+		Warehouse w = createFiveItems();
+		w.addItem(new Item("Apple", 0.0));
+		String expected = "names=Cookie Apple Chicken Beef Yogurt";
+
+		StringBuilder actual = new StringBuilder();
+		actual.append("names=");
+		for(Item i : w.items){
+			actual.append(i.getName()).append(" ");
+		}
+
+		System.out.println("Expected=\n" + expected);
+		System.out.println("Actual=\n" + actual + "\n");
+	}
+
+	//10.Add a test method, testGetItemsWithName for getItemsWithName where
+	//the method returns 2 or more items that partially match the argument.
+
+	public static void testGetItemsWithName(){
+		System.out.println("-->testGetItemsWithName");
+
+		Warehouse w = createFiveItems();
+		w.addItem(new RefrigeratedItem("Ice-Cream", 2.0, 30.0));
+		w.addItem(new RefrigeratedItem("Ice", 1.0, 30.0));
+		w.addItem(new RefrigeratedItem("Ice-Yogurt", 3.0, 30.0));
+
+		ArrayList<Item> items = new ArrayList<>(w.getItemsWithName("Ice"));
+
+		String expected = "names=Ice-Cream Ice Ice-Yogurt";
+		StringBuilder actual = new StringBuilder();
+		actual.append("names=");
+
+		for(Item i : items){
+			actual.append(i.getName()).append(" ");
+		}
+
+		System.out.println("Expected=\n" + expected);
+		System.out.println("Actual=\n" + actual + "\n");
+	}
+
+	//a.testHasItem_Find that finds the Item requested.
+
+	public static void testHasItem_Find(){
+		System.out.println("-->testHasItem_Find");
+
+		Warehouse w = createFiveItems();
+		String expected = "true";
+		String actual = "" + w.hasItem("Chicken");
+
+		System.out.println("Expected=" + expected);
+		System.out.println("Actual=" + actual + "\n");
+	}
+
+	//
+
+	public static void testHasItem_NoFind(){
+		System.out.println("-->testHasItem_Find");
+
+		Warehouse w = createFiveItems();
+		String expected = "false";
+		String actual = "" + w.hasItem("Turkey");
+
+		System.out.println("Expected=" + expected);
+		System.out.println("Actual=" + actual + "\n");
+	}
+
 	// Helper Methods
 	private static Warehouse createThreeItems(){
 		Item item1 = new Item("Cookie", 1.5);
@@ -386,54 +465,5 @@ public class WarehouseTest {
 		w.addItem(refrigeratedItem3);
 
 		return w;
-	}
-
-	private static Warehouse createTenItems(){
-		Item item1 = new Item("Cookie", 1.5);
-		Item item2 = new Item("Apple", 1.2);
-		Item item3 = new Item("Banana", 1.5);
-		Item item4 = new Item("PopTart", 1.2);
-		Item item5 = new Item("Bread", 1.5);
-		Item item6 = new Item("Grapes", 1.2);
-		Item item7 = new Item("Orange", 1.5);
-		Item refrigeratedItem8 = new RefrigeratedItem("Chicken", 2.00, 32.2);
-		Item refrigeratedItem9 = new RefrigeratedItem("Beef", 2.00, 32.2);
-		Item refrigeratedItem10 = new RefrigeratedItem("Yogurt", 2.00, 32.2);
-
-		Warehouse w = new Warehouse();
-		w.addItem(item1);
-		w.addItem(item2);
-		w.addItem(item3);
-		w.addItem(item4);
-		w.addItem(item5);
-		w.addItem(item6);
-		w.addItem(item7);
-		w.addItem(refrigeratedItem8);
-		w.addItem(refrigeratedItem9);
-		w.addItem(refrigeratedItem10);
-
-		return w;
-	}
-
-	//My test methods
-	/**
-	 * Add 10 items, 3 of which are refrigerated. Remove the 10th item (index 9) and
-	 * verify: the item is returned, and the number of items is decremented.
-	 */
-	public static void testRemoveItem_WithIndex9() {
-		System.out.println("-->testRemoveItem_WithIndex");
-
-		Warehouse w = createTenItems();
-		int numItemsBefore = w.getNumItems();
-		Item removedItem = w.removeItem(9);
-		int numItemsAfter = w.getNumItems();
-		String expected = "Expected name=Chicken, Before numItems=10, After numItems=9";
-		String actual = String.format("Actual name=%s, Before numItems=%d, After numItems=%d",
-				removedItem.getName(), numItemsBefore, numItemsAfter);
-		System.out.println(expected);
-		System.out.println(actual + "\n");
-
-		System.out.println("toString=\n");
-		System.out.println(w.toString());
 	}
 }

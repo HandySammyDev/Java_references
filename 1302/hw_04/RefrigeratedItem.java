@@ -1,4 +1,4 @@
-package hw_04.prob1;
+package prob1;
 
 public class RefrigeratedItem extends Item {
 
