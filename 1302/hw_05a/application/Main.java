@@ -42,18 +42,21 @@ public class Main extends Application {
 			Martian m = null;
 			String msg = "";
 			
-			if(rbCreateGreen.isSelected() && !txfVolume.getText().equals("")) {
-				m = new GreenMartian(getId(), getVolume());
-			}
-			else {
-				m = new GreenMartian(getId());
-			}
-			
-			if(rbCreateRed.isSelected() && !txfVolume.getText().equals("")) {
-				m = new RedMartian(getId(), getVolume(), getTenacity());
-			}
-			else {
-				m = new RedMartian(getId(), getTenacity());
+			if (rbCreateGreen.isSelected()) {
+				if (!txfVolume.getText().equals("")) {
+					m = new GreenMartian(getId(), getVolume());
+				} 
+				else {
+					m = new GreenMartian(getId());
+				}
+			} 
+			else if (rbCreateRed.isSelected()) {
+				if (!txfVolume.getText().equals("")) {
+					m = new RedMartian(getId(), getVolume(), getTenacity());
+				} 
+				else {
+					m = new RedMartian(getId(), getTenacity());
+				}
 			}
 			
 			boolean b = mm.addMartian(m);
