@@ -1,6 +1,6 @@
 package comparator_examples;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
     private String name;
     private int ssNum;
     private double salary;
@@ -18,5 +18,16 @@ public class Employee {
     public String toString() {
         return String.format("Name: %-8s - SSN: %d\tSalary: $%.2f", getName(),
                 getSSNum(), getSalary() );
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Employee e = (Employee) o;
+        return this.ssNum==e.ssNum;
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        return this.ssNum-o.ssNum;
     }
 }
